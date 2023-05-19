@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up Form</title>
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var errorContainer = document.getElementById('errorContainer');
+            var isValid = true;
+
+            // Reset error messages
+            errorContainer.innerHTML = '';
+
+            // Validation for phone number
+            var phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                displayError('Please enter a valid Indian mobile number.');
+                isValid = false;
+            }
+
+            // Validation for email
+            var emailRegex = /^[a-z0-9]+@[a-z]+\.[a-z]+$/;
+            if (!emailRegex.test(email)) {
+                displayError('Please enter a valid email address.');
+                isValid = false;
+            }
+
+            // Validation for password and confirm password
+            if (password !== confirmPassword) {
+                displayError('Passwords do not match.');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function displayError(errorMessage) {
+            var errorContainer = document.getElementById('errorContainer');
+            var errorElement = document.createElement('p');
+            errorElement.className = 'error-message';
+            errorElement.innerHTML = errorMessage;
+            errorContainer.appendChild(errorElement);
+        }
+    </script>
+</head>
+<body>
+    <h1>Sign Up Form</h1>
+    <div id="errorContainer"></div>
+    <form onsubmit="return validateForm()">
+        <label for="qualification">Educational Qualification:</label>
+        <select id="qualification" required>
+            <option value="">Select qualification</option>
+            <option value="High School">High School</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
+            <option value="PhD">PhD</option>
+        </select>
+        <br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" placeholder="Enter Indian mobile number" required>
+        <br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="1" required>
+        <br>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" id="genderMale" name="gender" required>
+        <label for="genderMale">Male</label>
+        <input type="radio" id="genderFemale" name="gender" required>
+        <label for="genderFemale">Female</label>
+        <br>
+
+        <label for="email">Email:</label>
+        <input id="email" required>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <br>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" required>
+        <br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" required>
+        <br>
+
+        <input type="submit" value="Sign Up">
+    </form>
+</body>
+</html>
